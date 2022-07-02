@@ -11,17 +11,18 @@ import org.springframework.stereotype.Service;
 @Service
 @EnableKafka
 @RequiredArgsConstructor
-public class SimpleMessageService {
+public class OrderService {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, Order> kafkaTemplate;
+    private final String topic;
 
-    public void send(String message) {
-        log.info("Отправка сообщения в кафку {}", message);
-        kafkaTemplate.sendDefault(message);
+    public void send(Order order) {
+        log.info("Отправка сообщения в кафку {}", order);
+        kafkaTemplate.send(topic, "", order);
     }
 
     @KafkaListener(topics = "#{topic}")
-    public void listener(String message) {
-        log.info("Получено сообщение из кафки {}", message);
+    public void listener(Order order) {
+        log.info("Получено сообщение из кафки {}", order);
     }
 }
