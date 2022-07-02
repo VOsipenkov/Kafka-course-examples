@@ -3,11 +3,14 @@ spring:
     producer:
       bootstrap-servers: localhost:29092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: examples.kafka.course.JsonAdapter
+      value-serializer: examples.kafka.course.GsonAdapter
     consumer:
       bootstrap-servers: localhost:29092
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: examples.kafka.course.JsonAdapter
+      value-deserializer: examples.kafka.course.GsonAdapter
       group-id: simple-1
     template:
       default-topic: ReceivedOrders
+    properties:
+      key-class: java.lang.String
+      value-class: examples.kafka.course.Order
