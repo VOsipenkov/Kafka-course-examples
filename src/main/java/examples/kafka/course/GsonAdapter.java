@@ -17,9 +17,8 @@ public class GsonAdapter<T> implements Serializer<T>, Deserializer<T> {
     private Gson gSon;
     private Class<T> clazz;
 
-    private String VALUE_TYPE = "value-class";
-    private String KEY_TYPE = "key-class";
-
+    private static final String VALUE_TYPE = "value-class";
+    private static final String KEY_TYPE = "key-class";
     private static final String SERIALIZATION_MESSAGE_ERROR = "Serialization class not found";
 
     @Override
