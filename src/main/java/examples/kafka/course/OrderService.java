@@ -2,8 +2,8 @@ package examples.kafka.course;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +21,7 @@ public class OrderService {
         kafkaTemplate.send(topic, "", order);
     }
 
-    @KafkaListener(topics = "#{topic}")
-    public void listener(Order order) {
-        log.info("Получено сообщение из кафки {}", order);
+    public void listener(ConsumerRecord<String, Order> record) {
+        log.info("Получено сообщение из кафки {}", record);
     }
 }
